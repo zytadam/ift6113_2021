@@ -106,12 +106,12 @@ if __name__=="__main__":
 	os.makedirs("plots/", exist_ok=True)
 	os.makedirs("output/", exist_ok=True)
 
+	for iteration in range(number_of_iterations):
+		mesh = subdivision_method(mesh)
+
 	print("Saving a plot")
 	mp.offline()
 	p = mp.plot(mesh.vs, mesh.faces, c=mesh.vs[:,0], return_plot=True, filename='plots/test.html')
-
-	for iteration in range(number_of_iterations):
-		mesh = subdivision_method(mesh)
 
 	mesh.write_OBJ("output/test_output.obj")
 	print("Done")
