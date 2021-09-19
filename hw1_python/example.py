@@ -9,6 +9,7 @@ def subdivision_method(inputTrimesh):
 	# print("No subdivision implemented")
 	oldVertexs = inputTrimesh.vs
 	oldFaces = inputTrimesh.faces
+	# print(oldFaces.dtype)
 
 	tempFaces = np.c_[oldFaces[:,0], -np.ones((oldFaces.shape[0])),
 					 oldFaces[:,1], -np.ones((oldFaces.shape[0])),
@@ -48,6 +49,7 @@ def subdivision_method(inputTrimesh):
 	newFaces = np.append(newFaces, np.c_[tempFaces[:,3:6]], axis = 0)
 	newFaces = np.append(newFaces, np.c_[tempFaces[:,5], tempFaces[:,:2]], axis = 0)
 	newFaces = np.append(newFaces, np.c_[tempFaces[:,1], tempFaces[:,3], tempFaces[:,5]], axis = 0)
+	newFaces = newFaces.astype('int32')
 
 	# print(tempFaces)
 	# print(newFaces)
@@ -93,7 +95,7 @@ def subdivision_method(inputTrimesh):
 if __name__=="__main__":
 	parser = argparse.ArgumentParser(description="Run subdivision")
 	parser.add_argument("--input", "-i", default="../input/cube.obj", help="path to input .obj")
-	parser.add_argument("-n", default=1, type=int, help="number of iterations to perform")
+	parser.add_argument("-n", default=3, type=int, help="number of iterations to perform")
 	args = parser.parse_args()
 
 	inputfile = args.input
